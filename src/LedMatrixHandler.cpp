@@ -167,6 +167,11 @@ void UpdateMessage(String strMsg)
    if (strCurMsg.length() != strTempMsg.length())
    {
       bMsgScrolling = true;
+      strCurMsg = PadMessageString(strCurMsg);
+   }
+   else
+   {
+      bMsgScrolling = false;
    }
 }
 
@@ -198,6 +203,16 @@ String TruncateStringForDisplay(String strInput)
       ESP_LOGV(TAG, " POS %i: %i + %i", i, charWidths[i], i + 1 < strInput.length() ? ActiveFontInfo->SpaceWidth : 0);
    }
 */
+   return strOutput;
+}
+
+String PadMessageString(String input)
+{
+   String strOutput = input;
+   for (int i = 0; i < LED_MATRIX_WIDTH - iDigitPos; i++)
+   {
+      strOutput += " ";
+   }
    return strOutput;
 }
 
