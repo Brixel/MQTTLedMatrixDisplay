@@ -17,7 +17,6 @@ const uint8_t *iaActiveFont = ActiveFontInfo->Bitmap;
 const FONT_CHAR_INFO *ActiveFontCharInfo = ActiveFontInfo->Descriptors;
 
 String strCurMsg = "";
-bool bMsgScrolling = false;
 unsigned long ulLastScrollStep = 0;
 unsigned long ulScrollStepInterval = 800;
 uint iScrollCurrentFirstChar = 0;
@@ -40,7 +39,7 @@ void MatrixDisplayLoop()
 
 void HandleScrollingText()
 {
-   if (!bMsgScrolling || millis() - ulLastScrollStep < ulScrollStepInterval)
+   if (millis() - ulLastScrollStep < ulScrollStepInterval)
    {
       return;
    }
@@ -161,13 +160,9 @@ void UpdateMessage(String strMsg)
 {
    matrix.clear();
    ESP_LOGD(TAG, "Updating display: %s", strMsg.c_str());
+   strCurMsg = PadMessageString(strMsg);
    String strTempMsg = TruncateStringForDisplay(strMsg);
-   strCurMsg = strMsg;
    DrawASCII(strTempMsg);
-   if (strCurMsg.length() != strTempMsg.length())
-   {
-      bMsgScrolling = true;
-   }
 }
 
 String TruncateStringForDisplay(String strInput)
@@ -198,6 +193,21 @@ String TruncateStringForDisplay(String strInput)
       ESP_LOGV(TAG, " POS %i: %i + %i", i, charWidths[i], i + 1 < strInput.length() ? ActiveFontInfo->SpaceWidth : 0);
    }
 */
+   return strOutput;
+}
+
+String PadMessageString(String input)
+{
+   String strOutput = "";
+   for (int i = 0; i < LED_MATRIX_WIDTH - iDigitPos; i++)
+   {
+      strOutput += " ";
+   }
+   strOutput += input;
+   for (int i = 0; i < LED_MATRIX_WIDTH - iDigitPos; i++)
+   {
+      strOutput += " ";
+   }
    return strOutput;
 }
 
