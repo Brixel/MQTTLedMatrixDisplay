@@ -1,6 +1,40 @@
 
-# Created by https://www.gitignore.io/api/platformio,visualstudiocode
-# Edit at https://www.gitignore.io/?templates=platformio,visualstudiocode
+# Created by https://www.gitignore.io/api/platformio,visualstudiocode,c++
+# Edit at https://www.gitignore.io/?templates=platformio,visualstudiocode,c++
+
+### C++ ###
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
 
 ### PlatformIO ###
 .pio
@@ -10,7 +44,7 @@
 
 ### VisualStudioCode ###
 .vscode/*
-!.vscode/settings.json
+#!.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
@@ -19,4 +53,5 @@
 # Ignore all local history of files
 .history
 
-# End of https://www.gitignore.io/api/platformio,visualstudiocode
+# End of https://www.gitignore.io/api/platformio,visualstudiocode,c++
+
